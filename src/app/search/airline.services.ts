@@ -1,0 +1,35 @@
+import { AirLineModel } from "../../models/airline.model";
+
+export class AirlineService {
+    static getAirlines(): AirLineModel[] {
+        return[
+            {
+                id: 1,
+                name: 'Air Serbia',
+                countryOfOrigin: 'Serbia',
+                website: 'https://www.airserbia.com/'
+            },
+
+             {
+                id: 2,
+                name: 'Fly Emirater',
+                countryOfOrigin: 'UAE',
+                website: 'https://www.emirates.com/english'
+            },
+
+            {
+                id: 3,
+                name: 'Lufthansa',
+                countryOfOrigin: 'Germany',
+                website: 'https://www.lufthansa.com/'
+            },
+
+            {
+                id: 4,
+                name: 'Turkish Airlines',
+                countryOfOrigin: 'Turkiye',
+                website: 'https://www.turskishairlines.com/'
+            }
+        ]
+    }
+}

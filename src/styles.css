@@ -1,0 +1,43 @@
+
+html,
+body {
+    height: 100%;
+    background-color: #757575;
+    color: black;
+}
+
+a {
+    color: gray;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.loading{
+    width: 700px;
+    text-align: center;
+    align-items: center;
+}
+
+.wrapper{
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
