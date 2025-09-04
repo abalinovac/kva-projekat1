@@ -4,9 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-loading',
   imports: [MatCardModule],
-  templateUrl: './loading.html',
-  styleUrl: './loading.css'
+  templateUrl: './loading.component.html',
+  styleUrl: './loading.component.css'
 })
-export class Loading {
+export class LoadingComponent {
 
 }

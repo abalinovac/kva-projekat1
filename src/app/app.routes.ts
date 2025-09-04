@@ -1,17 +1,23 @@
 import { Routes } from '@angular/router';
-import { Home } from './home/home';
-import { About } from './about/about';
-import { Search } from './search/search';
-import { Airline } from './airline/airline';
-import { Details } from './details/details';
-import { Login } from './login/login';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { SearchComponent } from './search/search.component';
+import { AirlineComponent } from './airline/airline.component';
+import { DetailsComponent } from './details/details.component';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { OrderComponent } from './order/order.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
-    {path: '', component: Home},
-    {path: 'about', component: About},
-    {path: 'search', component: Search},
-    {path: 'airline', component: Airline},
-    {path: 'details/:id', component: Details},
-    {path: 'login', component: Login},
-    {path: '**', redirectTo: ''}
-];
+    { path: '', component: HomeComponent },
+    { path: 'about', component: AboutComponent },
+    { path: 'search', component: SearchComponent },
+    { path: 'airlines', component: AirlineComponent },
+    { path: 'details/:id/order', component: OrderComponent },
+    { path: 'details/:id', component: DetailsComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: '**', redirectTo: '' }
+]
