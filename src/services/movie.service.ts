@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: 'https://flight.pequla.com/api',
+    baseURL: 'https://movie.pequla.com/api/movie?director=&actor=&search=&genre=',
     headers: {
         'Accept': 'application/json',
         'X-Client-Name': 'KVA/2025'
@@ -13,23 +13,22 @@ const client = axios.create({
     }
 })
 
-export class FlightService {
-    static async getFlights(page: number = 0, size: number = 10) {
+export class MovieService {
+    static async getMovies(page: number = 0, size: number = 10) {
         return client.request({
-            url: '/flight',
+            url: '/movie',
             method: 'GET',
             params: {
                 'page': page,
                 'size': size,
-                'sort': 'scheduledAt,asc',
-                'type': 'departure'
+                'sort': 'id',          //stavila id umesto sceduledAt
             }
         })
     }
 
-    static async getFlightList() {
+    static async getMovieList() {
         return client.request({
-            url: '/flight/list',
+            url: '/movie/list',
             method: 'GET',
             params: {
                 'type': 'departure'
@@ -37,11 +36,11 @@ export class FlightService {
         })
     }
 
-    static async getFlightById(id: number) {
-        return client.get(`/flight/${id}`)
+    static async getMovieById(id: number) {
+        return client.get(`/movie/${id}`)
     }
 
-    static async getDestinations() {
-        return client.get('/flight/destination')
+    static async getDescription() {
+        return client.get('/movie/description')       //izmeniti url
     }
 }

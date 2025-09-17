@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { FlightService } from '../../services/flight.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-user',
@@ -53,7 +53,7 @@ export class UserComponent {
 
     this.user = UserService.getActiveUser()
     this.userCopy = UserService.getActiveUser()
-    FlightService.getDestinations()
+    MovieService.getMovies()
       .then(rsp => this.destinationList = rsp.data)
   }
 

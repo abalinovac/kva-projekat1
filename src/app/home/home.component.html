@@ -7,25 +7,23 @@
     </mat-card>
 </div>
 
-<div *ngIf="flights" class="container">
-    <mat-card class="flight-card" appearance="outlined" *ngFor="let flight of flights">
-        <img mat-card-image [src]="utils.generateDestinationImage(flight.destination)" [alt]="flight.destination">
+<div *ngIf="movies" class="container">
+    <mat-card class="flight-card" appearance="outlined" *ngFor="let movies of movies">
+        <img mat-card-image [src]="movies.poster" [alt]="movies.title" style="height: 500px;">
         <mat-card-content>
-            <h1>{{flight.destination}}</h1>
-            <p>Scheduled at: {{utils.formatDate(flight.scheduledAt)}}</p>
-            <p>Flight number: {{flight.flightNumber}}</p>
-            <p>Plane model: {{flight.plane}}</p>
-            <p>Temperature: {{flight.temperature}} &deg;C</p>
+            <h1>{{movies.title}}</h1>
+            <p>Kratak opis:<br>{{movies.shortDescription}}</p>
+            <p>Glumci:<br> {{getActors(movies)}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <a mat-button [routerLink]="['/details/', flight.id]">
+            <a mat-button [routerLink]="['/details/', movies.movieId]">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
             </a>
-            <a mat-button [routerLink]="['/details/'+flight.id+'/order']">
+            <a mat-button [routerLink]="['/details/'+movies.movieId+'/order']">
                 <i class="fa-solid fa-cart-shopping"></i> Book Now
             </a>
         </mat-card-actions>
     </mat-card>
 </div>
 
-<app-loading *ngIf="!flights && !error" />
+<app-loading *ngIf="!movies && !error" />

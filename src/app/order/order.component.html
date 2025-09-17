@@ -1,19 +1,19 @@
-<div *ngIf="flight">
+<div *ngIf="movie">
     <mat-card class="order-card" appearance="outlined">
-        <img mat-card-image [src]="utils.generateDestinationImage(flight.destination)" [alt]="flight.destination">
+        <img mat-card-image [src]="utils.generateDestinationImage(movie.poster)" [alt]="movie.poster">
         <mat-card-content>
-            <h3>New Order - {{flight.destination}}</h3>
+            <h3>New order - {{movie.title}}</h3>
             <mat-form-field class="full-width">
-                <mat-label>Destination</mat-label>
-                <input type="text" matInput [value]="flight.destination" disabled>
+                <mat-label>Name</mat-label>
+                <input type="text" matInput [value]="movie.title" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Flight Number</mat-label>
-                <input type="text" matInput [value]="flight.flightNumber" disabled>
+                <mat-label>Description</mat-label>
+                <input type="text" matInput [value]="movie.description" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Scheduled At:</mat-label>
-                <input type="text" matInput [value]="utils.formatDate(flight.scheduledAt)" disabled>
+                <mat-label>Created at:</mat-label>
+                <input type="text" matInput [value]="movie.createdAt" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Airline</mat-label>

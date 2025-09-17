@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FlightService } from '../../services/flight.service';
+import { MovieService } from '../../services/movie.service';
 import { NgFor, NgIf } from '@angular/common';
 import { AxiosError } from 'axios';
-import { FlightModel } from '../../models/flight.model';
+import { MovieGenre, MovieModel } from '../../models/movie.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { UtilsService } from '../../services/utils.service';
@@ -16,17 +16,27 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  public flights: FlightModel[] | null = null
+  public movies: MovieModel[] | null = null
   public error: string | null = null
 
   constructor(public utils: UtilsService) {
-    FlightService.getFlights(0, 9)
-      .then(rsp => {
-        this.flights = rsp.data.content
-        for (let f of this.flights!) {
-          f.temperature = Math.floor(Math.random() * (35 - 12 + 1) + 12)
-        }
-      })
+    MovieService.getMovies()
+      .then(rsp => this.movies = rsp.data)
       .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`)
   }
+
+  public getMoviePoster(movie: any): string { 
+    return movie.poster; 
+  }
+
+  public getActors(movie: any): string {
+    // Provera da li niz postoji i da li ima elemenata
+    if (!movie || !movie.movieActors || movie.movieActors.length === 0) {
+        return 'Nema podataka o glumcima';
+    }
+    
+    // Ključno: Mapiranje do imena glumca i spajanje u string
+    return movie.movieActors.map((ma: any) => ma.actor.name).join(', ');
+}
+
 }
