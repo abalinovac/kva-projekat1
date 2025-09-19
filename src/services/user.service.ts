@@ -7,13 +7,12 @@ export class UserService {
         if (!localStorage.getItem('users')) {
             const arr: UserModel[] = [
                 {
-                    email: 'user@example.com',
-                    firstName: 'Example',
+                    email: 'user@gmail.com',
+                    firstName: 'User',
                     lastName: 'User',
-                    phone: '+3816123456789',
-                    address: 'Mokroluska 14, Vozdovac',
-                    favouriteDestination: 'Banja Luka',
-                    password: 'user123',
+                    phone: '0601111111',
+                    address: 'Bilo sta',
+                    password: 'user1234',
                     orders: []
                 }
             ]
@@ -45,7 +44,6 @@ export class UserService {
                 u.lastName = model.lastName
                 u.address = model.address
                 u.phone = model.phone
-                u.favouriteDestination = model.favouriteDestination
             }
         }
 

@@ -82,7 +82,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <p *ngIf="dataSource.length == 0">Could not find any flights for that criteria!</p>
+    <p *ngIf="dataSource.length == 0">Ne postoji pretraga za odabrane filtere!</p>
 </div>
 
 <app-loading *ngIf="!dataSource" />

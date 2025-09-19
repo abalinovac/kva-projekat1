@@ -30,12 +30,10 @@ export class HomeComponent {
   }
 
   public getActors(movie: any): string {
-    // Provera da li niz postoji i da li ima elemenata
     if (!movie || !movie.movieActors || movie.movieActors.length === 0) {
         return 'Nema podataka o glumcima';
     }
     
-    // Ključno: Mapiranje do imena glumca i spajanje u string
     return movie.movieActors.map((ma: any) => ma.actor.name).join(', ');
 }
 

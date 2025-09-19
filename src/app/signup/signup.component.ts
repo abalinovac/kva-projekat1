@@ -7,12 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 import { MatSelectModule } from '@angular/material/select';
-import { NgFor } from '@angular/common';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-signup',
-  imports: [MatCardModule, NgFor, RouterLink, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatSelectModule],
+  imports: [MatCardModule,RouterLink, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatSelectModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -35,12 +34,12 @@ export class SignupComponent {
 
   public doSignup() {
     if (this.email == '' || this.password == '') {
-      alert('Email i password su obavezna polja')
+      alert('Email i lozinka su obavezna polja')
       return
     }
 
     if (this.password !== this.repeatPassword) {
-      alert('Password se ne uklapa')
+      alert('Lozinka se ne uklapa')
       return
     }
 
@@ -51,7 +50,6 @@ export class SignupComponent {
       lastName: this.lastName,
       phone: this.phone,
       address: this.address,
-      favouriteDestination: this.destination,
       orders: []
     })
 

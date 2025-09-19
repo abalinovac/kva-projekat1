@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "klijentske-veb-aplikacije-2025",
+      "name": "kva-projekat1",
       "dependencies": {
         "@angular/animations": "^19.1.0",
         "@angular/cdk": "^19.1.5",

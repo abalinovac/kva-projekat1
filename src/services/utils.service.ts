@@ -11,7 +11,4 @@ export class UtilsService {
     return new Date(iso).toLocaleString('sr-RS')
   }
 
-  public generateDestinationImage(dest: string) {
-    return `https://img.pequla.com/destination/${dest.split(' ')[0].toLowerCase()}.jpg`
-  }
 }

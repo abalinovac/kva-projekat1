@@ -6,7 +6,6 @@
             <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
             <mat-card-subtitle>
                 <p class="no-border">Rezervacije: {{user.orders.length}}</p>
-                <!--<p class="no-border">Destination: {{user.favouriteDestination}}</p>-->
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="user-card-content">
@@ -30,7 +29,7 @@
                         <input matInput type="password" [(ngModel)]="repeatPasswordValue" />
                     </mat-form-field>
                     <button mat-button (click)="doChangePassword()">
-                        <i class="fa-solid fa-paper-plane"></i> Potvrdi
+                        <i class="fa-solid fa-paper-plane"></i> Promeni
                     </button>
                 </mat-expansion-panel>
                 <mat-expansion-panel *ngIf="userCopy">
@@ -163,7 +162,7 @@
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef>
-                        Actions
+                        Akcije
                     </th>
                     <td mat-cell *matCellDef="let element" class="actions">
                         <a mat-button [routerLink]="['/details/', element.movieId]">

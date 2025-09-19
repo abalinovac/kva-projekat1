@@ -88,35 +88,35 @@ export class SearchComponent {
     if (this.allData == null) return;
 
     this.dataSource = this.allData!
-        
-        .filter(obj => {
-            if (this.selectedGenre == null || this.selectedGenre === 'Svi žanrovi') return true; 
-            return obj.movieGenres.some(mg => mg.genre.name === this.selectedGenre);
-        })
-        .filter(obj => {
-            if (this.selectedTitle == null || this.selectedTitle === 'Svi naslovi') return true; 
-            return obj.title === this.selectedTitle;
-        })
-        .filter(obj => {
-            if (this.userInput === '') return true;
 
-            const inputLower = this.userInput.toLowerCase();
-            return obj.title.toLowerCase().includes(inputLower) ||
-                   obj.description.toLowerCase().includes(inputLower) ||
-                   obj.shortDescription.toLowerCase().includes(inputLower);
-        })
-        .filter(obj => {
-            if (this.selectedDate == null || this.selectedDate === 'Svi datumi') return true;
-            return obj.startDate === this.selectedDate;
-        });
-        
-}
+      .filter(obj => {
+        if (this.selectedGenre == null || this.selectedGenre === 'Svi žanrovi') return true;
+        return obj.movieGenres.some(mg => mg.genre.name === this.selectedGenre);
+      })
+      .filter(obj => {
+        if (this.selectedTitle == null || this.selectedTitle === 'Svi naslovi') return true;
+        return obj.title === this.selectedTitle;
+      })
+      .filter(obj => {
+        if (this.userInput === '') return true;
+
+        const inputLower = this.userInput.toLowerCase();
+        return obj.title.toLowerCase().includes(inputLower) ||
+          obj.description.toLowerCase().includes(inputLower) ||
+          obj.shortDescription.toLowerCase().includes(inputLower);
+      })
+      .filter(obj => {
+        if (this.selectedDate == null || this.selectedDate === 'Svi datumi') return true;
+        return obj.startDate === this.selectedDate;
+      });
+
+  }
 
   public formatGenres(movie: any): string {
     if (!movie || !movie.movieGenres || movie.movieGenres.length === 0) {
-        return 'Nema žanra';
+      return 'Nema žanra';
     }
     return movie.movieGenres.map((mg: any) => mg.genre.name).join(', ');
-}
+  }
 
 }

@@ -4,12 +4,10 @@ const client = axios.create({
     baseURL: 'https://movie.pequla.com/api',
     headers: {
         'Accept': 'application/json',
-        'X-Client-Name': 'KVA/2025'
+        'X-Client-Name': 'kva-projekat1'
     },
     validateStatus: (status: number) => {
         return status === 200
-        // Samo ako je 200 vrati response
-        // U ostalim slucajevima baci izuzetak
     }
 })
 
@@ -21,7 +19,7 @@ export class MovieService {
             params: {
                 'page': page,
                 'size': size,
-                'sort': 'id',          //stavila id umesto sceduledAt
+                'sort': 'id',
             }
         })
     }
@@ -40,7 +38,4 @@ export class MovieService {
         return client.get(`/movie/${id}`)
     }
 
-    static async getDescription() {
-        return client.get('/movie/description')       //izmeniti url
-    }
 }
