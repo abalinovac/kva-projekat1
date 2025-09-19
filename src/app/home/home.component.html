@@ -1,26 +1,27 @@
 <div *ngIf="error" class="container">
     <mat-card class="loading" appearance="outlined" color="red">
         <mat-card-content>
-            <h1>Oops, an error occured!</h1>
+            <h1>Upss, dogodila se greška...</h1>
             <p style="color: red;">{{error}}</p>
         </mat-card-content>
     </mat-card>
 </div>
 
 <div *ngIf="movies" class="container">
-    <mat-card class="flight-card" appearance="outlined" *ngFor="let movies of movies">
+    <mat-card class="movie-card" appearance="outlined" *ngFor="let movies of movies">
         <img mat-card-image [src]="movies.poster" [alt]="movies.title" style="height: 500px;">
         <mat-card-content>
             <h1>{{movies.title}}</h1>
             <p>Kratak opis:<br>{{movies.shortDescription}}</p>
+            <p>Žanr:<br>{{getGenres(movies)}}</p> 
             <p>Glumci:<br> {{getActors(movies)}}</p>
         </mat-card-content>
         <mat-card-actions>
             <a mat-button [routerLink]="['/details/', movies.movieId]">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Detalji
             </a>
             <a mat-button [routerLink]="['/details/'+movies.movieId+'/order']">
-                <i class="fa-solid fa-cart-shopping"></i> Book Now
+                <i class="fa-solid fa-cart-shopping"></i> Rezerviši
             </a>
         </mat-card-actions>
     </mat-card>

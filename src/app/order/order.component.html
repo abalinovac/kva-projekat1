@@ -1,42 +1,41 @@
 <div *ngIf="movie">
     <mat-card class="order-card" appearance="outlined">
-        <img mat-card-image [src]="utils.generateDestinationImage(movie.poster)" [alt]="movie.poster">
         <mat-card-content>
-            <h3>New order - {{movie.title}}</h3>
+            <h3>Rezerviši- {{movie.title}}</h3>
             <mat-form-field class="full-width">
-                <mat-label>Name</mat-label>
+                <mat-label>Naziv</mat-label>
                 <input type="text" matInput [value]="movie.title" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Description</mat-label>
-                <input type="text" matInput [value]="movie.description" disabled>
+                <mat-label>Vreme trajanja</mat-label>
+                <input type="text" matInput [value]="movie.runTime" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Created at:</mat-label>
-                <input type="text" matInput [value]="movie.createdAt" disabled>
+                <mat-label>Kratak opis:</mat-label>
+                <input type="text" matInput [value]="movie.shortDescription" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Airline</mat-label>
-                <mat-select [(ngModel)]="selectedAirline">
-                    <mat-option *ngFor="let airline of airlines" [value]="airline.id">{{airline.name}}</mat-option>
+                <mat-label>Bioskopi</mat-label>
+                <mat-select [(ngModel)]="selectedCinema">
+                    <mat-option *ngFor="let airline of cinemas" [value]="airline.id">{{airline.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Choose price</mat-label>
+                <mat-label>Izaberi sedište</mat-label>
                 <mat-select [(ngModel)]="selectedPrice">
-                    <mat-option [value]="150">Economy - 150&euro;</mat-option>
-                    <mat-option [value]="480">Buissines - 480&euro;</mat-option>
-                    <mat-option [value]="850">First Class - 850&euro;</mat-option>
+                    <mat-option [value]="5000">Vip sedište</mat-option>
+                    <mat-option [value]="3000">Ljubavno sedište</mat-option>
+                    <mat-option [value]="1000">Obično sedište</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Ticket Count</mat-label>
+                <mat-label>Broj karata</mat-label>
                 <input type="number" matInput [(ngModel)]="selectedTicketCount"> 
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
             <button mat-button (click)="doOrder()">
-                <i class="fa-solid fa-cart-shopping"></i> Order Now
+                <i class="fa-solid fa-cart-shopping"></i> Naruči
             </button>
         </mat-card-actions>
     </mat-card>

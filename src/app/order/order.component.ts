@@ -8,8 +8,8 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { AirlineModel } from '../../models/airline.model';
-import { AirlineService } from '../../services/airline.service';
+import { CinemaModel } from '../../models/cinema.model';
+import { CinemaService } from '../../services/cinema.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
@@ -23,14 +23,14 @@ import Swal from 'sweetalert2';
 })
 export class OrderComponent {
   public movie: MovieModel | null = null
-  public airlines: AirlineModel[] = AirlineService.getAirlines()
-  public selectedAirline: number = this.airlines[0].id
+  public cinemas: CinemaModel[] = CinemaService.getCinemas()
+  public selectedCinema: number = this.cinemas[0].id
   public selectedTicketCount: number = 1
   public selectedPrice: number = 150
 
   public constructor(private route: ActivatedRoute, public utils: UtilsService, private router: Router) {
-    route.params.subscribe(params => {
-      MovieService.getMovieById(params['id'])
+    this.route.params.subscribe(params => {
+      MovieService.getMovieById(params['movieId'])
         .then(rsp => {
           this.movie = rsp.data
         })
@@ -39,36 +39,44 @@ export class OrderComponent {
 
   public doOrder() {
     Swal.fire({
-      title: `Place an order to ${this.movie?.movieId}?`,     //stavila zanr
-      text: "Orders can be canceled any time from your user profile!",
+      title: `Kreiraj rezervaciju za film: ${this.movie?.title}?`, 
+      text: "Rezervacija se može otkazati u svakom momentu sa Vašeg profila!",
       icon: "warning",
       showCancelButton: true,
       customClass: {
         popup: 'bg-dark'
       },
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#52d25bff",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, place an order!"
+      confirmButtonText: "Sačuvaj rezervaciju!"
     }).then((result) => {
       if (result.isConfirmed) {
-        const result = UserService.createOrder({
+        const orderCreationResult = UserService.createOrder({
           id: new Date().getTime(),
-          flightId: this.movie!.movieId,
-          flightNumber: this.movie!.description,   //proveriti
-          destination: this.movie!.description,
-          airline: AirlineService.getAirlineById(this.selectedAirline)!,
+          movieId: this.movie!.movieId, 
+          title: this.movie!.title,
+          shortDescription: this.movie!.shortDescription,
+          name: CinemaService.getCinemaById(this.selectedCinema)!, 
           count: this.selectedTicketCount,
           pricePerItem: this.selectedPrice,
           status: 'ordered',
           rating: null
         })
-        result ? this.router.navigate(['/user']) :
+        
+        orderCreationResult ? this.router.navigate(['/user']) :
           Swal.fire({
-            title: "Failed crating an order",
-            text: "Something is wrong with your order!",
+            title: "Kreiranje rezervacije nije uspelo!", 
+            text: "Kako biste uspešno rezervisali kartu, potrebno je da se registrujete ",
             icon: "error"
           });
       }
     })
+  }
+
+  public getGenres(movie: MovieModel): string {
+    if (!movie || !movie.movieGenres || movie.movieGenres.length === 0) {
+      return 'Nema podataka o žanru';
+    }
+    return movie.movieGenres.map(mg => mg.genre.name).join(', ');
   }
 }

@@ -1,7 +1,7 @@
 export interface Director {
     directorId: number;
     name: string;
-    createdAt: string; // Ili Date, ako ga parsujete
+    createdAt: string;
 }
 
 export interface Actor {
@@ -41,18 +41,13 @@ export interface MovieModel {
     originalTitle: string;
     description: string;
     shortDescription: string;
-
-    
-    // **VAŽNO:** Sada znamo da je 'poster' pun URL!
-    poster: string; 
-    
-    startDate: string; // Ili Date
+    poster: string;     
+    startDate: string; 
     shortUrl: string;
     runTime: number;
     active: boolean;
-    createdAt: string; // Ili Date
-    updatedAt: string | null; // Može biti null
-
+    createdAt: string; 
+    updatedAt: string | null;
     director: Director;
     movieActors: MovieActor[];
     movieGenres: MovieGenre[];

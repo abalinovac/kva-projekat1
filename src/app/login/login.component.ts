@@ -32,6 +32,6 @@ export class LoginComponent {
       return
     }
 
-    alert('Bad email or password')
+    alert('Pogrešan email ili password.')
   }
 }

@@ -35,12 +35,12 @@ export class SignupComponent {
 
   public doSignup() {
     if (this.email == '' || this.password == '') {
-      alert('Email and password are required fields')
+      alert('Email i password su obavezna polja')
       return
     }
 
     if (this.password !== this.repeatPassword) {
-      alert('Passwords dont match')
+      alert('Password se ne uklapa')
       return
     }
 
@@ -55,6 +55,6 @@ export class SignupComponent {
       orders: []
     })
 
-    result ? this.router.navigate(['/login']) : alert('Email is already taken')
+    result ? this.router.navigate(['/login']) : alert('Email je već zauzet')
   }
 }

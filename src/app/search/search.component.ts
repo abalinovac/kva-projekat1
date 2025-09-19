@@ -21,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
     NgFor,
     MatButtonModule,
     LoadingComponent,
-    RouterLink,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
@@ -32,19 +31,19 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  displayedColumns: string[] = ['id', 'destination', 'flightNumber', 'scheduledAt', 'actions'];
-  allData: MovieModel[] | null = null
-  destinationList: string[] = []
-  selectedDestination: string | null = null
-  dataSource: MovieModel[] | null = null
-  flightNumberList: string[] = []
-  selectedFlightNumber: string | null = null
-  userInput: string = ''
-  dateOptions: string[] = []
-  selectedDate: string | null = null
+  displayedColumns: string[] = ['movieId', 'title', 'startDate', 'shortDescription', 'movieGenres'];
+  allData: MovieModel[] | null = null;
+  genreList: string[] = [];
+  selectedGenre: string | null = 'Svi žanrovi';
+  dataSource: MovieModel[] | null = null;
+  titleList: string[] = ['Svi naslovi'];
+  selectedTitle: string | null = 'Svi naslovi';
+  userInput: string = '';
+  dateList: string[] = ['Svi datumi'];
+  selectedDate: string | null = 'Svi datumi';
 
   public constructor(public utils: UtilsService) {
-    MovieService.getMovieList()
+    MovieService.getMovies()
       .then(rsp => {
         this.allData = rsp.data
         this.dataSource = rsp.data
@@ -53,53 +52,71 @@ export class SearchComponent {
   }
 
   public generateSearchCriteria(source: MovieModel[]) {
-    this.destinationList = source.map(obj => obj.poster)
-      .filter((dest: string, i: number, ar: any[]) => ar.indexOf(dest) === i)
-    this.flightNumberList = source.map(obj => obj.description)
-      .filter((num: string, i: number, ar: any[]) => ar.indexOf(num) === i)
 
+    const uniqueGenres = source
+      .flatMap(movie => movie.movieGenres)
+      .map(movieGenre => movieGenre.genre.name)
+      .filter((genre, index, array) => array.indexOf(genre) === index);
+    this.genreList = ['Svi žanrovi'].concat(uniqueGenres);
+    this.selectedGenre = 'Svi žanrovi';
+
+
+    const uniqueTitles = source
+      .map(obj => obj.title)
+      .filter((title, index, array) => array.indexOf(title) === index);
+    this.titleList = ['Svi naslovi'].concat(uniqueTitles);
+    this.selectedTitle = 'Svi naslovi';
+
+
+    const uniqueDates = source
+      .map(obj => obj.startDate)
+      .filter((date, index, array) => array.indexOf(date) === index);
+    this.dateList = ['Svi datumi'].concat(uniqueDates);
+    this.selectedDate = 'Svi datumi';
   }
 
   public doReset() {
-    this.userInput = ''
-    this.selectedDestination = null
-    this.selectedFlightNumber = null
-    this.selectedDate = null
-    this.dataSource = this.allData
-    this.generateSearchCriteria(this.allData!)
+    this.userInput = '';
+    this.selectedGenre = 'Svi žanrovi';
+    this.selectedTitle = 'Svi naslovi';
+    this.selectedDate = 'Svi datumi';
+    this.dataSource = this.allData;
+    this.generateSearchCriteria(this.allData!);
   }
 
   public doFilterChain() {
-    if (this.allData == null) return
+    if (this.allData == null) return;
 
     this.dataSource = this.allData!
-      .filter(obj => {
-        // Input Field Search
-        if (this.userInput == '') return true
-        return obj.title.toLowerCase().includes(this.userInput) ||
-          obj.title.toString().includes(this.userInput) ||
-          obj.description.includes(this.userInput)
-      })
-      .filter(obj => {
-        // Destintination Search
-        if (this.selectedDestination == null) return true
-        return obj.createdAt === this.selectedDestination
-      })
-      .filter(obj => {
-        // Flight Number Search
-        if (this.selectedFlightNumber == null) return true
-        return obj.description === this.selectedFlightNumber      //promeniti
-      })
-      .filter(obj => {
-        // Date Search
-        if (this.selectedDate == null) return true
-        const start = new Date(`${this.selectedDate}T00:00:01`)
-        const end = new Date(`${this.selectedDate}T23:59:59`)
-        const scheduled = new Date(obj.createdAt)
+        
+        .filter(obj => {
+            if (this.selectedGenre == null || this.selectedGenre === 'Svi žanrovi') return true; 
+            return obj.movieGenres.some(mg => mg.genre.name === this.selectedGenre);
+        })
+        .filter(obj => {
+            if (this.selectedTitle == null || this.selectedTitle === 'Svi naslovi') return true; 
+            return obj.title === this.selectedTitle;
+        })
+        .filter(obj => {
+            if (this.userInput === '') return true;
 
-        return (start <= scheduled) && (scheduled <= end)
-      })
+            const inputLower = this.userInput.toLowerCase();
+            return obj.title.toLowerCase().includes(inputLower) ||
+                   obj.description.toLowerCase().includes(inputLower) ||
+                   obj.shortDescription.toLowerCase().includes(inputLower);
+        })
+        .filter(obj => {
+            if (this.selectedDate == null || this.selectedDate === 'Svi datumi') return true;
+            return obj.startDate === this.selectedDate;
+        });
+        
+}
 
-    this.generateSearchCriteria(this.dataSource)
-  }
+  public formatGenres(movie: any): string {
+    if (!movie || !movie.movieGenres || movie.movieGenres.length === 0) {
+        return 'Nema žanra';
+    }
+    return movie.movieGenres.map((mg: any) => mg.genre.name).join(', ');
+}
+
 }

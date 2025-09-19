@@ -18,7 +18,6 @@ import { MovieService } from '../../services/movie.service';
   selector: 'app-user',
   imports: [
     NgIf,
-    NgFor,
     MatButtonModule,
     MatCardModule,
     MatTableModule,
@@ -34,7 +33,7 @@ import { MovieService } from '../../services/movie.service';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  public displayedColumns: string[] = ['id', 'destination', 'flightNumber', 'airline', 'count', 'price', 'total', 'status', 'actions'];
+  public displayedColumns: string[] = ['movieId', 'title', 'shortDescription', 'name', 'count', 'pricePerItem', 'total', 'status', 'actions'];
   public user: UserModel | null = null
   public userCopy: UserModel | null = null
   public destinationList: string[] = []

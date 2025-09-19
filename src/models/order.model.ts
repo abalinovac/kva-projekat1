@@ -1,11 +1,11 @@
-import { AirlineModel } from "./airline.model"
+import { CinemaModel } from "./cinema.model"
 
 export interface OrderModel {
     id: number
-    flightId: number
-    flightNumber: string
-    airline: AirlineModel
-    destination: string
+    movieId: number
+    title: string
+    shortDescription: string
+    name: CinemaModel
     count: number
     pricePerItem: number
     status: 'ordered' | 'paid' | 'canceled',

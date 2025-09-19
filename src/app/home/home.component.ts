@@ -39,4 +39,12 @@ export class HomeComponent {
     return movie.movieActors.map((ma: any) => ma.actor.name).join(', ');
 }
 
+  public getGenres(movie: any): string {
+    if (!movie || !movie.movieGenres || movie.movieGenres.length === 0) {
+        return 'Nema podataka o žanru';
+    }
+    
+    return movie.movieGenres.map((mg: any) => mg.genre.name).join(', ');
+}
+
 }
