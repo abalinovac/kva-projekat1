@@ -56,6 +56,7 @@ export class OrderComponent {
           movieId: this.movie!.movieId, 
           title: this.movie!.title,
           shortDescription: this.movie!.shortDescription,
+          runTime: this.movie!.runTime,
           name: CinemaService.getCinemaById(this.selectedCinema)!, 
           count: this.selectedTicketCount,
           pricePerItem: this.selectedPrice,

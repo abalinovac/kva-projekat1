@@ -9,7 +9,7 @@
 
 <div *ngIf="movies" class="container">
     <mat-card class="movie-card" appearance="outlined" *ngFor="let movies of movies">
-        <img mat-card-image [src]="movies.poster" [alt]="movies.title" style="height: 500px;">
+        <img mat-card-image [src]="movies.poster" [alt]="movies.title">
         <mat-card-content>
             <h1>{{movies.title}}</h1>
             <p>Kratak opis:<br>{{movies.shortDescription}}</p>

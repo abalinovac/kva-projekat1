@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MovieService } from '../../services/movie.service';
+import { MovieModel } from '../../models/movie.model';
 
 @Component({
   selector: 'app-user',
@@ -33,10 +34,10 @@ import { MovieService } from '../../services/movie.service';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  public displayedColumns: string[] = ['movieId', 'title', 'shortDescription', 'name', 'count', 'pricePerItem', 'total', 'status', 'actions'];
+  public displayedColumns: string[] = ['movieId', 'title', 'runTime', 'name', 'count', 'pricePerItem', 'total', 'status', 'actions'];
   public user: UserModel | null = null
   public userCopy: UserModel | null = null
-  public destinationList: string[] = []
+  public movieList: MovieModel[] = [];
 
   public oldPasswordValue = ''
   public newPasswordValue = ''
@@ -53,7 +54,7 @@ export class UserComponent {
     this.user = UserService.getActiveUser()
     this.userCopy = UserService.getActiveUser()
     MovieService.getMovies()
-      .then(rsp => this.destinationList = rsp.data)
+      .then(rsp => this.movieList = rsp.data)
   }
 
   public doChangePassword() {

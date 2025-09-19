@@ -4,7 +4,8 @@ export interface OrderModel {
     id: number
     movieId: number
     title: string
-    shortDescription: string
+    shortDescription: string; 
+    runTime: number
     name: CinemaModel
     count: number
     pricePerItem: number

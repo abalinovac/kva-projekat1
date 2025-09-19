@@ -1,6 +1,6 @@
 <div class="wrapper" *ngIf="movies$ | async as movie">
   <div class="img-container">
-    <img [src]="movie.poster" [alt]="movie.title" style="max-width: 100%; border-radius: 8px;">
+    <img [src]="movie.poster" [alt]="movie.title">
   </div>
   <mat-card class="movie-card" appearance="outlined">
     <mat-card-content>

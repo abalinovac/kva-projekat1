@@ -81,7 +81,7 @@
 
                 <ng-container matColumnDef="movieId">
                     <th mat-header-cell *matHeaderCellDef class="id">
-                        ID
+                        Id
                     </th>
                     <td mat-cell *matCellDef="let element" class="id"> {{element.movieId}} </td>
                 </ng-container>
@@ -102,18 +102,18 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="shortDescription">
-                    <th mat-header-cell *matHeaderCellDef class="airline">
-                        Kratak opis
+                <ng-container matColumnDef="runTime">
+                    <th mat-header-cell *matHeaderCellDef class="runTime">
+                        Trajanje
                     </th>
-                    <td mat-cell *matCellDef="let element" class="airline">
-                        {{element.shortDescription}}
+                    <td mat-cell *matCellDef="let element" class="runTime">
+                        {{element.runTime}}
                     </td>
-                </ng-container>
+                </ng-container> 
 
                 <ng-container matColumnDef="count">
                     <th mat-header-cell *matHeaderCellDef class="count">
-                         Broj karata
+                        Broj karata
                     </th>
                     <td mat-cell *matCellDef="let element" class="count">
                         {{element.count}}
